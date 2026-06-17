@@ -33,7 +33,7 @@ func EncodeError(ctx context.Context, req any, info *grpc.UnaryServerInfo, handl
 	trailer := metadata.Pairs(trailerKey, string(encodedErr))
 	grpc.SetTrailer(ctx, trailer)
 
-	return resp, nil
+	return resp, err
 }
 
 // HydrateError returns a UnaryClientInterceptor that deserializes errors
