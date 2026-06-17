@@ -7,12 +7,16 @@ type Tree struct {
 	Code     string
 	err      error
 	Children []*Tree
+	Message  string
 }
 
 // Error returns the error message.
 func (e *Tree) Error() string {
 	if e.err != nil {
 		return e.err.Error()
+	}
+	if e.Message != "" {
+		return e.Message
 	}
 	if e.Code != "" {
 		return e.Code

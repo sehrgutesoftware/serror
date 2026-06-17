@@ -1,5 +1,7 @@
 package serror
 
+import "fmt"
+
 // CodeResolver is a function that resolves an error code to its error value.
 type CodeResolver func(code string) (error, bool)
 
@@ -16,6 +18,8 @@ func Hydrate(node *Tree, resolve CodeResolver) {
 	if node.Code != "" {
 		if resolved, ok := resolve(node.Code); ok {
 			node.err = resolved
+		} else {
+			node.err = fmt.Errorf("unresolved error (code %s): %s", node.Code, node.Message)
 		}
 	}
 

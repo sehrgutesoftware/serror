@@ -22,6 +22,7 @@ func Encode(e error) *Tree {
 	node := &Tree{
 		err:      e,
 		Children: make([]*Tree, 0),
+		Message:  e.Error(),
 	}
 
 	if ec, ok := e.(errorCoder); ok {
