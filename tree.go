@@ -11,7 +11,16 @@ type Tree struct {
 
 // Error returns the error message.
 func (e *Tree) Error() string {
-	return e.err.Error()
+	if e.err != nil {
+		return e.err.Error()
+	}
+	if e.Code != "" {
+		return e.Code
+	}
+	if len(e.Children) > 0 {
+		return e.Children[0].Error()
+	}
+	return "unknown error"
 }
 
 // Is checks if the error is the same as the target.
